@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="RegomortEngine.vcxproj" Id="119fa814-0882-4867-be49-6c5b4712374c" />
+</Solution>
