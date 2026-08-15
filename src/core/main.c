@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <math.h>
+#include <time.h>
 
 const uint16_t WIDTH = 747;
 const uint16_t HEIGHT = 420;
@@ -30,6 +32,12 @@ int main(void)
 
 	GLfloat vertices[] =
 	{
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		0.0f, 0.5f, 0.0f
+	};
+
+	GLfloat originalVertices[] = {
 		-0.5f, -0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
 		0.0f, 0.5f, 0.0f
@@ -81,6 +89,12 @@ int main(void)
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
+		float y = sinf(re_get_time() * 2) * 0.25f;
+		for (int i = 1; i < sizeof(vertices) / sizeof(vertices[0]); i += 3)
+			vertices[i] = originalVertices[i] + y;
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
